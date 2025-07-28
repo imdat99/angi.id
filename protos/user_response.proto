@@ -1,0 +1,24 @@
+syntax = "proto3";
+package user;
+import "google/protobuf/timestamp.proto";
+
+option go_package = "angi.account.user.v1;userpb";
+
+message User {
+  string id = 1;
+  string name = 2;
+  string email = 3;
+  google.protobuf.Timestamp created_at = 4;
+  google.protobuf.Timestamp updated_at = 5;
+}
+
+message UserProfileResponse {
+  User user = 1;
+  bool found = 2;
+}
+message UserListResponse {
+  repeated User users = 1;
+  int32 total_count = 2;
+  int32 page = 3;
+  int32 page_size = 4;
+}
