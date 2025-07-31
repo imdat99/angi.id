@@ -9,6 +9,7 @@ package userpb
 import (
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
+	emptypb "google.golang.org/protobuf/types/known/emptypb"
 	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	reflect "reflect"
 	sync "sync"
@@ -150,7 +151,7 @@ func (x *UserProfileResponse) GetFound() bool {
 	return false
 }
 
-type UserListResponse struct {
+type ListUserResponse struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Users         []*User                `protobuf:"bytes,1,rep,name=users,proto3" json:"users,omitempty"`
 	TotalCount    int32                  `protobuf:"varint,2,opt,name=total_count,json=totalCount,proto3" json:"total_count,omitempty"`
@@ -160,20 +161,20 @@ type UserListResponse struct {
 	sizeCache     protoimpl.SizeCache
 }
 
-func (x *UserListResponse) Reset() {
-	*x = UserListResponse{}
+func (x *ListUserResponse) Reset() {
+	*x = ListUserResponse{}
 	mi := &file_protos_user_response_proto_msgTypes[2]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
 
-func (x *UserListResponse) String() string {
+func (x *ListUserResponse) String() string {
 	return protoimpl.X.MessageStringOf(x)
 }
 
-func (*UserListResponse) ProtoMessage() {}
+func (*ListUserResponse) ProtoMessage() {}
 
-func (x *UserListResponse) ProtoReflect() protoreflect.Message {
+func (x *ListUserResponse) ProtoReflect() protoreflect.Message {
 	mi := &file_protos_user_response_proto_msgTypes[2]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
@@ -185,44 +186,104 @@ func (x *UserListResponse) ProtoReflect() protoreflect.Message {
 	return mi.MessageOf(x)
 }
 
-// Deprecated: Use UserListResponse.ProtoReflect.Descriptor instead.
-func (*UserListResponse) Descriptor() ([]byte, []int) {
+// Deprecated: Use ListUserResponse.ProtoReflect.Descriptor instead.
+func (*ListUserResponse) Descriptor() ([]byte, []int) {
 	return file_protos_user_response_proto_rawDescGZIP(), []int{2}
 }
 
-func (x *UserListResponse) GetUsers() []*User {
+func (x *ListUserResponse) GetUsers() []*User {
 	if x != nil {
 		return x.Users
 	}
 	return nil
 }
 
-func (x *UserListResponse) GetTotalCount() int32 {
+func (x *ListUserResponse) GetTotalCount() int32 {
 	if x != nil {
 		return x.TotalCount
 	}
 	return 0
 }
 
-func (x *UserListResponse) GetPage() int32 {
+func (x *ListUserResponse) GetPage() int32 {
 	if x != nil {
 		return x.Page
 	}
 	return 0
 }
 
-func (x *UserListResponse) GetPageSize() int32 {
+func (x *ListUserResponse) GetPageSize() int32 {
 	if x != nil {
 		return x.PageSize
 	}
 	return 0
 }
 
+type ListUsersRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Page          int32                  `protobuf:"varint,1,opt,name=page,proto3" json:"page,omitempty"`
+	PageSize      int32                  `protobuf:"varint,2,opt,name=page_size,json=pageSize,proto3" json:"page_size,omitempty"`
+	SearchQuery   string                 `protobuf:"bytes,3,opt,name=search_query,json=searchQuery,proto3" json:"search_query,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *ListUsersRequest) Reset() {
+	*x = ListUsersRequest{}
+	mi := &file_protos_user_response_proto_msgTypes[3]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *ListUsersRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*ListUsersRequest) ProtoMessage() {}
+
+func (x *ListUsersRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_protos_user_response_proto_msgTypes[3]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use ListUsersRequest.ProtoReflect.Descriptor instead.
+func (*ListUsersRequest) Descriptor() ([]byte, []int) {
+	return file_protos_user_response_proto_rawDescGZIP(), []int{3}
+}
+
+func (x *ListUsersRequest) GetPage() int32 {
+	if x != nil {
+		return x.Page
+	}
+	return 0
+}
+
+func (x *ListUsersRequest) GetPageSize() int32 {
+	if x != nil {
+		return x.PageSize
+	}
+	return 0
+}
+
+func (x *ListUsersRequest) GetSearchQuery() string {
+	if x != nil {
+		return x.SearchQuery
+	}
+	return ""
+}
+
 var File_protos_user_response_proto protoreflect.FileDescriptor
 
 const file_protos_user_response_proto_rawDesc = "" +
 	"\n" +
-	"\x1aprotos/user_response.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\"\xb6\x01\n" +
+	"\x1aprotos/user_response.proto\x12\x04user\x1a\x1fgoogle/protobuf/timestamp.proto\x1a\x1bgoogle/protobuf/empty.proto\"\xb6\x01\n" +
 	"\x04User\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x12\n" +
 	"\x04name\x18\x02 \x01(\tR\x04name\x12\x14\n" +
@@ -235,13 +296,21 @@ const file_protos_user_response_proto_rawDesc = "" +
 	"\x04user\x18\x01 \x01(\v2\n" +
 	".user.UserR\x04user\x12\x14\n" +
 	"\x05found\x18\x02 \x01(\bR\x05found\"\x86\x01\n" +
-	"\x10UserListResponse\x12 \n" +
+	"\x10ListUserResponse\x12 \n" +
 	"\x05users\x18\x01 \x03(\v2\n" +
 	".user.UserR\x05users\x12\x1f\n" +
 	"\vtotal_count\x18\x02 \x01(\x05R\n" +
 	"totalCount\x12\x12\n" +
 	"\x04page\x18\x03 \x01(\x05R\x04page\x12\x1b\n" +
-	"\tpage_size\x18\x04 \x01(\x05R\bpageSizeB\x1dZ\x1bangi.account.user.v1;userpbb\x06proto3"
+	"\tpage_size\x18\x04 \x01(\x05R\bpageSize\"f\n" +
+	"\x10ListUsersRequest\x12\x12\n" +
+	"\x04page\x18\x01 \x01(\x05R\x04page\x12\x1b\n" +
+	"\tpage_size\x18\x02 \x01(\x05R\bpageSize\x12!\n" +
+	"\fsearch_query\x18\x03 \x01(\tR\vsearchQuery2\x80\x01\n" +
+	"\vUserService\x124\n" +
+	"\x0eGetCurrentUser\x12\x16.google.protobuf.Empty\x1a\n" +
+	".user.User\x12;\n" +
+	"\tListUsers\x12\x16.user.ListUsersRequest\x1a\x16.user.ListUserResponseB\x11Z\x0f./userpb;userpbb\x06proto3"
 
 var (
 	file_protos_user_response_proto_rawDescOnce sync.Once
@@ -255,20 +324,26 @@ func file_protos_user_response_proto_rawDescGZIP() []byte {
 	return file_protos_user_response_proto_rawDescData
 }
 
-var file_protos_user_response_proto_msgTypes = make([]protoimpl.MessageInfo, 3)
+var file_protos_user_response_proto_msgTypes = make([]protoimpl.MessageInfo, 4)
 var file_protos_user_response_proto_goTypes = []any{
 	(*User)(nil),                  // 0: user.User
 	(*UserProfileResponse)(nil),   // 1: user.UserProfileResponse
-	(*UserListResponse)(nil),      // 2: user.UserListResponse
-	(*timestamppb.Timestamp)(nil), // 3: google.protobuf.Timestamp
+	(*ListUserResponse)(nil),      // 2: user.ListUserResponse
+	(*ListUsersRequest)(nil),      // 3: user.ListUsersRequest
+	(*timestamppb.Timestamp)(nil), // 4: google.protobuf.Timestamp
+	(*emptypb.Empty)(nil),         // 5: google.protobuf.Empty
 }
 var file_protos_user_response_proto_depIdxs = []int32{
-	3, // 0: user.User.created_at:type_name -> google.protobuf.Timestamp
-	3, // 1: user.User.updated_at:type_name -> google.protobuf.Timestamp
+	4, // 0: user.User.created_at:type_name -> google.protobuf.Timestamp
+	4, // 1: user.User.updated_at:type_name -> google.protobuf.Timestamp
 	0, // 2: user.UserProfileResponse.user:type_name -> user.User
-	0, // 3: user.UserListResponse.users:type_name -> user.User
-	4, // [4:4] is the sub-list for method output_type
-	4, // [4:4] is the sub-list for method input_type
+	0, // 3: user.ListUserResponse.users:type_name -> user.User
+	5, // 4: user.UserService.GetCurrentUser:input_type -> google.protobuf.Empty
+	3, // 5: user.UserService.ListUsers:input_type -> user.ListUsersRequest
+	0, // 6: user.UserService.GetCurrentUser:output_type -> user.User
+	2, // 7: user.UserService.ListUsers:output_type -> user.ListUserResponse
+	6, // [6:8] is the sub-list for method output_type
+	4, // [4:6] is the sub-list for method input_type
 	4, // [4:4] is the sub-list for extension type_name
 	4, // [4:4] is the sub-list for extension extendee
 	0, // [0:4] is the sub-list for field type_name
@@ -285,9 +360,9 @@ func file_protos_user_response_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_protos_user_response_proto_rawDesc), len(file_protos_user_response_proto_rawDesc)),
 			NumEnums:      0,
-			NumMessages:   3,
+			NumMessages:   4,
 			NumExtensions: 0,
-			NumServices:   0,
+			NumServices:   1,
 		},
 		GoTypes:           file_protos_user_response_proto_goTypes,
 		DependencyIndexes: file_protos_user_response_proto_depIdxs,

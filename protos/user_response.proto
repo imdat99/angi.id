@@ -1,8 +1,9 @@
 syntax = "proto3";
 package user;
 import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
 
-option go_package = "angi.account.user.v1;userpb";
+option go_package = "./userpb;userpb";
 
 message User {
   string id = 1;
@@ -16,9 +17,18 @@ message UserProfileResponse {
   User user = 1;
   bool found = 2;
 }
-message UserListResponse {
+message ListUserResponse {
   repeated User users = 1;
   int32 total_count = 2;
   int32 page = 3;
   int32 page_size = 4;
+}
+message ListUsersRequest {
+  int32 page = 1;
+  int32 page_size = 2;
+  string search_query = 3;
+}
+service UserService {
+  rpc GetCurrentUser (google.protobuf.Empty) returns (User);
+  rpc ListUsers (ListUsersRequest) returns (ListUserResponse);
 }

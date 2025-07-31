@@ -4,6 +4,7 @@ go 1.24
 
 require (
 	github.com/gofiber/fiber/v2 v2.52.9
+	github.com/sirupsen/logrus v1.9.3
 	google.golang.org/protobuf v1.36.6
 )
 
