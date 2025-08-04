@@ -5,14 +5,14 @@ server:
 JWTSecret: "your_jwt_secret_key"
 
 database:
-  user: "admin"
-  host: "localhost"
-  port: 3306
-  password: "secret"
-  name: "mydb"
+  user: "your_username"
+  host: 47.84.63.130
+  port: 5432
+  password: "your_password"
+  name: "angi_id"
 
 redis:
-  host: "localhost"
+  host: 8.219.120.11
   port: 6379
   db: 3
-  password: "your_redis_password"
+  password: "thuc@nh"

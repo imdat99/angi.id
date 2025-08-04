@@ -1,4 +1,4 @@
-package storage
+package db
 
 // redis.go
 // This file contains the Redis client setup for the application.
@@ -6,7 +6,7 @@ package storage
 import (
 	"fmt"
 
-	"angi.account/config"
+	"angi.id/internal/shared/config"
 
 	"github.com/redis/go-redis/v9"
 )

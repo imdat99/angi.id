@@ -15,7 +15,7 @@ type Config struct {
 		Host     string `yaml:"host"`
 		Port     int    `yaml:"port"`
 		User     string `yaml:"user"`
-		Password string `yaml:"password"`
+		Password string `yaml:"password,omitempty"`
 		Name     string `yaml:"name"`
 	} `yaml:"database"`
 	Redis struct {

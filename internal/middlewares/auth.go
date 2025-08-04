@@ -3,9 +3,9 @@ package middlewares
 import (
 	"strings"
 
-	"angi.account/config"
-	"angi.account/modules/common"
-	"angi.account/types"
+	"angi.id/internal/modules/common"
+	"angi.id/internal/shared/config"
+	"angi.id/internal/types"
 	"github.com/gofiber/fiber/v2"
 )
 

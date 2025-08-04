@@ -3,8 +3,8 @@ package common
 import (
 	"errors"
 
-	"angi.account/config"
-	"angi.account/types"
+	"angi.id/internal/shared/config"
+	"angi.id/internal/types"
 	"github.com/golang-jwt/jwt/v5"
 )
 

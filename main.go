@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"log"
 
-	"angi.account/config"
-	"angi.account/modules/storage"
-	"angi.account/response"
-	"angi.account/routers"
+	"angi.id/internal/response"
+	"angi.id/internal/routers"
+	"angi.id/internal/shared/config"
+	"angi.id/internal/shared/db"
 	"github.com/gofiber/fiber/v2/middleware/cors"
 	"github.com/gofiber/fiber/v2/middleware/logger"
 	"github.com/gofiber/fiber/v2/middleware/recover"
@@ -23,14 +23,18 @@ func main() {
 		EnableStackTrace: true,
 	}))
 
-	dbpool, err := storage.ConnectMySQL()
+	dbpool, err := db.ConnectPostgres()
+	redisClient := db.NewRedisClient()
+
 	if err != nil {
-		log.Fatalf("Error connecting to MySQL: %v", err)
+		log.Fatalf("Error connecting to Postgres: %v", err)
 		return
 	}
+
+	defer redisClient.Close()
 	defer dbpool.Close()
 
-	routers.SetupRoutes(app)
+	routers.Init(app)
 
 	// notfoundary
 	app.Use(func(c *fiber.Ctx) error {

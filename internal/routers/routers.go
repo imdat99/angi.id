@@ -3,14 +3,14 @@ package routers
 import (
 	"time"
 
-	m "angi.account/middlewares"
-	"angi.account/modules/common"
-	"angi.account/userpb"
+	m "angi.id/internal/middlewares"
+	"angi.id/internal/modules/common"
+	"angi.id/userpb"
 	"github.com/gofiber/fiber/v2"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-func SetupRoutes(app *fiber.App) {
+func Init(app *fiber.App) {
 	apiV1 := app.Group("/api/v1")
 	user := apiV1.Group("/user", m.Auth())
 
@@ -48,6 +48,6 @@ func SetupRoutes(app *fiber.App) {
 	// })
 
 	// You can import and use other route files as needed
-	// import "angi.account/routers/user"
+	// import "angi.id/routers/user"
 	// user.SetupUserRoutes(app)
 }
