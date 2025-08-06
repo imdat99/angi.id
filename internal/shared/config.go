@@ -1,8 +1,10 @@
-package config
+package shared
 
 import (
 	"os"
 
+	"github.com/bytedance/sonic"
+	"github.com/gofiber/fiber/v2"
 	"gopkg.in/yaml.v3"
 )
 
@@ -50,4 +52,15 @@ func loadConfig() (*Config, error) {
 	}
 
 	return &cfg, nil
+}
+func FiberConfig() fiber.Config {
+	return fiber.Config{
+		Prefork:       false,
+		CaseSensitive: true,
+		ServerHeader:  "Fiber",
+		AppName:       "Fiber API",
+		ErrorHandler:  ErrorHandler,
+		JSONEncoder:   sonic.Marshal,
+		JSONDecoder:   sonic.Unmarshal,
+	}
 }

@@ -3,17 +3,22 @@ package routers
 import (
 	"time"
 
+	"angi.id/internal/container"
 	m "angi.id/internal/middlewares"
 	"angi.id/internal/modules/common"
+
+	// "angi.id/internal/modules/common"
+	"angi.id/internal/modules/healthcheck"
 	"angi.id/userpb"
 	"github.com/gofiber/fiber/v2"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )
 
-func Init(app *fiber.App) {
+func Init(app *fiber.App, ctn *container.Container) {
+	// app.Get("/health", healthcheck.HealthCheck)
+	healthcheck.Init(app, ctn)
 	apiV1 := app.Group("/api/v1")
 	user := apiV1.Group("/user", m.Auth())
-
 	user.Get("", func(c *fiber.Ctx) error {
 		user := &userpb.User{
 			Id:    "123",

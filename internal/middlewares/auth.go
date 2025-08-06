@@ -3,8 +3,7 @@ package middlewares
 import (
 	"strings"
 
-	"angi.id/internal/modules/common"
-	"angi.id/internal/shared/config"
+	"angi.id/internal/shared"
 	"angi.id/internal/types"
 	"github.com/gofiber/fiber/v2"
 )
@@ -22,7 +21,7 @@ func Auth() fiber.Handler {
 			return fiber.NewError(fiber.StatusUnauthorized, "Please authenticate")
 		}
 
-		payload, err := common.VerifyToken(token, config.Acfg.JWTSecret, types.TokenTypeAccessToken)
+		payload, err := shared.VerifyToken(token, shared.Acfg.JWTSecret, types.TokenTypeAccessToken)
 		if err != nil {
 			return fiber.NewError(fiber.StatusUnauthorized, "Please authenticate")
 		}

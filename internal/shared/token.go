@@ -1,9 +1,8 @@
-package common
+package shared
 
 import (
 	"errors"
 
-	"angi.id/internal/shared/config"
 	"angi.id/internal/types"
 	"github.com/golang-jwt/jwt/v5"
 )
@@ -18,7 +17,7 @@ func GenToken(payload types.TokenPayload) (string, error) {
 	}
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, claims)
 
-	return token.SignedString([]byte(config.Acfg.JWTSecret))
+	return token.SignedString([]byte(Acfg.JWTSecret))
 }
 
 func VerifyToken(tokenStr string, secret string, tokenType types.TokenType) (*types.TokenPayload, error) {

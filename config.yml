@@ -9,7 +9,7 @@ database:
   host: 47.84.63.130
   port: 5432
   password: "your_password"
-  name: "angi_id"
+  name: "angi"
 
 redis:
   host: 8.219.120.11
